@@ -2,6 +2,7 @@ import { View, TextInput, Button, Text, StyleSheet, FlatList } from 'react-nativ
 import { useState } from 'react';
 import GoalInput from './components/GoalInput';
 import GoalItem from './components/GoalItem';
+import { StatusBar } from 'expo-status-bar';
 
 
 export default function App() {
@@ -28,33 +29,36 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-
-      <Button
-        title='Add New Goal'
-        onPress={() => setModalVisible(true)}
-      />
-
-      <GoalInput
-        onNewGoal={addGoalHandler}
-        onCancel={closeAddGoalHandler}
-        visible={modalVisible}
-      />
-
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={myGoals}
-          renderItem={(dataItem) => (
-            <GoalItem
-              key={dataItem.item.id}
-              goal={dataItem.item}
-              onDeleteGoal={onDeleteGoalHandler}
-            />
-          )
-          }
+    <>
+      <StatusBar style='light' />
+      <View style={styles.container}>
+        <Button
+          title='Add New Goal'
+          onPress={() => setModalVisible(true)}
+          color="#572364"
         />
+
+        <GoalInput
+          onNewGoal={addGoalHandler}
+          onCancel={closeAddGoalHandler}
+          visible={modalVisible}
+        />
+
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={myGoals}
+            renderItem={(dataItem) => (
+              <GoalItem
+                key={dataItem.item.id}
+                goal={dataItem.item}
+                onDeleteGoal={onDeleteGoalHandler}
+              />
+            )
+            }
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -62,7 +66,8 @@ const styles = new StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 70,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    backgroundColor: "#572364"
   },
   goalsContainer: {
     flex: 5,

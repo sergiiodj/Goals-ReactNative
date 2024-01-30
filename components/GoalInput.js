@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, TextInput, StyleSheet, Button, Modal } from 'react-native';
+import { View, TextInput, StyleSheet, Button, Modal, Image } from 'react-native';
 
 export default function GoalInput({ onNewGoal, visible, onCancel }) {
     const [newGoal, setNewGoal] = useState("");
@@ -22,6 +22,10 @@ export default function GoalInput({ onNewGoal, visible, onCancel }) {
             animationType='slice'
         >
             <View style={styles.inputContainer}>
+                <Image
+                    source={require("../assets/img/goal.png")}
+                    style={styles.goalImg}
+                />
                 <TextInput
                     onChangeText={textChangeHandler}
                     style={styles.textInput}
@@ -35,6 +39,7 @@ export default function GoalInput({ onNewGoal, visible, onCancel }) {
                     </View>
                     <View style={styles.button}>
                         <Button
+                            color="#b496dc"
                             title='Add Goal'
                             onPress={onPressHandler} />
                     </View>
@@ -52,6 +57,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 20,
         borderBottomWidth: 1,
+        backgroundColor: "#572364",
         borderBottomColor: "#CCCCCC",
     },
     buttonContainer: {
@@ -64,10 +70,16 @@ const styles = StyleSheet.create({
 
     },
     textInput: {
+        backgroundColor: "#b496dc",
         borderColor: "#CCCCCC",
-        borderWidth: 1,
+        borderRadius: 15,
         width: "80%",
-        padding: 10
+        padding: 10,
+    },
+    goalImg: {
+        width: 120,
+        height: 120,
+        margin: 20,
     }
 })
 
