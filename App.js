@@ -7,6 +7,7 @@ import GoalItem from './components/GoalItem';
 export default function App() {
   // declaramos el hook de estado de componente "newGoal"
   const [myGoals, setMyGoals] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   function addGoalHandler(newGoalText) {
     setMyGoals(myCurrentGoals => [...myCurrentGoals,
@@ -22,10 +23,23 @@ export default function App() {
     })
   }
 
+  function closeAddGoalHandler() {
+    setModalVisible(false);
+  }
+
   return (
     <View style={styles.container}>
 
-      <GoalInput onNewGoal={addGoalHandler} />
+      <Button
+        title='Add New Goal'
+        onPress={() => setModalVisible(true)}
+      />
+
+      <GoalInput
+        onNewGoal={addGoalHandler}
+        onCancel={closeAddGoalHandler}
+        visible={modalVisible}
+      />
 
       <View style={styles.goalsContainer}>
         <FlatList
@@ -49,12 +63,6 @@ const styles = new StyleSheet.create({
     flex: 1,
     paddingTop: 70,
     paddingHorizontal: 15
-  },
-  textInput: {
-    borderColor: "#CCCCCC",
-    borderWidth: 1,
-    width: "70%",
-    padding: 10
   },
   goalsContainer: {
     flex: 5,
